@@ -1,0 +1,40 @@
+import java.util.*;
+
+// 전체 학생의 수 n, 체육복을 도난당한 학생들의 번호가 담긴 배열 lost, 여벌의 체육복을 가져온 학생들의 번호가 담긴 배열 reserve가 매개변수로 주어질 때,
+// 체육수업을 들을 수 있는 학생의 최댓값을 return
+class Solution {
+    public int solution(int n, int[] lost, int[] reserve) {
+
+        List<Integer> lostList = new ArrayList<Integer>(); // @2
+        for (int i : lost) lostList.add(i);
+
+        List<Integer> reserveList = new ArrayList<Integer>(); // @3
+        for (int i : reserve) reserveList.add(i);
+
+        for (int i=0; i< lostList.size(); i++) {
+            for (int j=0; j< reserveList.size(); j++) {
+                if (lostList.get(i) == reserveList.get(j)) {
+                    lostList.remove(i);
+                    reserveList.remove(j);
+                    i--;
+                    break;
+                }
+            }
+        }
+
+        for (int i=0; i< lostList.size(); i++) {
+            for (int j=0; j< reserveList.size(); j++) {
+                if (lostList.get(i)-1 == reserveList.get(j) || 
+                    lostList.get(i)+1 == reserveList.get(j)) {
+                    lostList.remove(i);
+                    reserveList.remove(j);
+                    i--;
+                    break;                    
+                }
+            }
+        }
+        
+        int answer = n - lostList.size();
+        return answer;
+    }
+}
