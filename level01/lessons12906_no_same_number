@@ -1,0 +1,17 @@
+import java.util.*;
+
+// 배열 arr에서 연속적으로 나타나는 숫자는 제거하고 남은 수들을 return
+public class Solution {
+    public int[] solution(int []arr) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(arr[0]);
+
+        for (int i=1; i<arr.length; i++) {
+            if (arrayList.get(arrayList.size()-1) != arr[i]) {
+                arrayList.add(arr[i]);
+            }
+        }
+        
+        return arrayList.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
