@@ -1,0 +1,18 @@
+// 자연수 n이 매개변수로 주어집니다. n을 3진법 상에서 앞뒤로 뒤집은 후,
+// 이를 다시 10진법으로 표현한 수를 return
+class Solution {
+    public int solution(int n) {
+        String ternary = "";
+        while(n>0) {
+            ternary = (n%3) + ternary;
+            n = n/3;
+        }
+
+        int answer = 0;
+        for (int i=binary.length(); i>0; i--) {
+            answer += Character.getNumericValue(binary.charAt(i-1)) *  Math.pow(3, (i-1));
+        }
+
+        return answer;
+    }
+}
