@@ -1,0 +1,38 @@
+import java.util.*;
+
+// 선행 스킬 순서 skill과 유저들이 만든 스킬트리1를 담은 배열 skill_trees가 매개변수로 주어질 때
+// 가능한 스킬트리 개수를 return
+class Solution {
+    public int solution(String skill, String[] skill_trees) {
+        int answer = 0;
+
+        List<Integer> treeIndex = new ArrayList<>();
+        List<Integer> treeSortedIndex = new ArrayList<>();
+
+        for (int j=0; j<skill_trees.length; j++) {
+            String tree = skill_trees[j];
+            treeIndex.clear();
+            treeSortedIndex.clear();
+
+            for (int i=0; i<skill.length(); i++) {
+                char s = skill.charAt(i);
+                int index = tree.indexOf(s);
+                treeIndex.add(index>=0 ? index : 1000);
+                treeSortedIndex.add(index>=0 ? index : 1000);
+            }
+
+            treeSortedIndex.sort(Comparator.naturalOrder());
+            boolean same = true;
+            for (int i=0; i<treeIndex.size(); i++) {
+                if (treeIndex.get(i).intValue() != treeSortedIndex.get(i).intValue()) {
+                    same = false;
+                    break;
+                }
+            }
+            if (same)
+                answer++;
+        }
+
+        return answer;
+    }
+}
